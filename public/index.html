@@ -46,5 +46,7 @@
     function addLine(msg) {
       $('#messages').append($('<li>').text(msg));
     }
+
+    $.ajax('/admin/login',{method: 'POST'})
   </script>
 </html>

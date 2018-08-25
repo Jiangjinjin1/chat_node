@@ -17,15 +17,6 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIo(server)
 
-const RedisStore = Redis(session)
-
-//创建redis客户端
-const redisClient = redis.createClient({
-  host: config.redisClient.host,
-  port: config.redisClient.port,
-  password: config.redisClient.password
-})
-
 io.on('connection', function(socket) {
   console.log('a user comming')
 })
@@ -49,6 +40,16 @@ app.all('*', function(req, res, next) {
 //解析cookie
 app.use(cookieParser())
 
+const RedisStore = Redis(session)
+
+//创建redis客户端
+const redisClient = redis.createClient({
+  host: config.redisClient.host,
+  port: config.redisClient.port,
+  // password: config.redisClient.password
+})
+
+
 //缓存到session到redis数据库
 app.use(session({
   name: config.session.name,
@@ -61,6 +62,7 @@ app.use(session({
 
 // 测试
 app.use(function (req, res, next) {  
+  console.log('req.session-----:',req.session)
   if (!req.session) {
     return next(new Error('error'))
   }

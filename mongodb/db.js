@@ -4,6 +4,7 @@ import config from '../config/default'
 const conncetDB = () => {
   mongoose.connect(config.url, {
     autoReconnect: true,
+    useNewUrlParser: true
   })
 }
 
