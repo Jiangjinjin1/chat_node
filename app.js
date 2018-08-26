@@ -12,6 +12,7 @@ import history from 'connect-history-api-fallback';
 import './mongodb/db'
 import router from './routes/index.js'
 import config from './config/default'
+import shortid from 'js-shortid'
 
 const app = express()
 const server = http.createServer(app)

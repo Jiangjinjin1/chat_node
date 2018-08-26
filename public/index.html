@@ -47,6 +47,16 @@
       $('#messages').append($('<li>').text(msg));
     }
 
-    $.ajax('/admin/login',{method: 'POST'})
+    // $.ajax('/admin/regist',{method: 'POST',data:{
+    //   username: '15221444332',password: '123'
+    // }})
+
+    // $.ajax('/admin/login',{method: 'POST',data:{
+    //   username: '15221444332',password: '123'
+    // }})
+
+    $.ajax('/admin/modifyPassWord',{method: 'POST',data:{
+      username: '15221444332',password: '12345'
+    }})
   </script>
 </html>

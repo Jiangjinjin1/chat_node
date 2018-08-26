@@ -29,3 +29,5 @@ db.on('close', function() {
   console.log('数据库断开， 重新链接数据库')
   conncetDB()
 })
+
+export default db
