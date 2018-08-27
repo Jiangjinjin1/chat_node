@@ -12,7 +12,6 @@ import history from 'connect-history-api-fallback';
 import './mongodb/db'
 import router from './routes/index.js'
 import config from './config/default'
-import shortid from 'js-shortid'
 
 const app = express()
 const server = http.createServer(app)
@@ -50,15 +49,17 @@ const redisClient = redis.createClient({
   // password: config.redisClient.password
 })
 
+const StoreInstance = new RedisStore({client: redisClient})
+
 
 //缓存到session到redis数据库
 app.use(session({
-  name: config.session.name,
-  secret: config.session.secret,
-  resave: true,
-  saveUninitialized: false,
+  name: config.session.name, //  设置 cookie 中，保存 session 的字段名称，默认为 connect.sid
+  secret: config.session.secret, // 通过设置的 secret 字符串，来计算 hash 值并放在 cookie 中，使产生的 signedCookie 防篡改
+  resave: false, // 即使 session 没有被修改，也保存 session 值，默认为 true。
+  saveUninitialized: false, // 刚被创建没有被修改,如果是要实现登陆的session那么最好设置为false
   cookie: config.session.cookie,
-  store: new RedisStore({client: redisClient}),
+  store: StoreInstance,
 }))
 
 // 测试
@@ -67,6 +68,15 @@ app.use(function (req, res, next) {
   if (!req.session) {
     return next(new Error('error'))
   }
+
+  // 通过store实例的get方法，用sessionID获取对应的session数据
+  // StoreInstance.get(req.sessionID, function(err,session) {
+  //   if(err) {
+  //     return next(new Error(err))
+  //   }
+  //   console.log('session:-----haha,',session)
+  // })
+
   next()
 })
 

@@ -58,6 +58,8 @@ class Admin {
             throw new Error(`创建用户发生错误${err}`)
           })
 
+          newUser.password = undefined
+
           res.send({
             code: 0,
             data: newUser,
@@ -110,6 +112,13 @@ class Admin {
         } else{
           const curUser = await User.findOne({username, password})
           if(!_.isEmpty(curUser)) {
+            req.session.userBasicInfo = {
+              username: curUser.username,
+              userId: curUser.userId
+            }
+
+            curUser.password = undefined
+
             res.send({
               code: 0,
               data: curUser,
@@ -162,7 +171,7 @@ class Admin {
             throw new Error(e.message)
           })
 
-          newUserPass.password = password
+          newUserPass.password = undefined
 
           res.send({
             code: 0,
@@ -179,6 +188,55 @@ class Admin {
           msg: e.message
         })
       }
+    })
+  }
+
+  async addNickName(req, res, next) {
+    const form = formidable.IncomingForm()
+
+    form.parse(req, async(err, fields, files) => {
+      if(err) {
+        res.send({
+          code: 1000,
+          type: 'FORM_DATA_ERROR',
+          msg: '表单信息错误'
+        })
+      }
+
+      try{
+        const {
+          nickname
+        } = fields
+        const userBasicInfo = req.session.userBasicInfo
+        if(!_.isEmpty(userBasicInfo)) {
+          const {
+            username
+          } = userBasicInfo
+
+          const newUserInfo = await User.findOneAndUpdate({username},{nickname}).catch((e) => {
+            throw new Error(e.massage)
+          })
+
+          res.send({
+            code: 0,
+            data: {
+              username: newUserInfo.username,
+              nickname: newUserInfo.nickname
+            },
+            msg: '添加昵称成功'
+          })
+        } else {
+          throw new Error('用户session失效,请重新登录')
+        }
+
+      }catch(e){
+        res.send({
+          code: 1000,
+          type: 'USER_ADD_NICKNAME_ERROR',
+          msg: e.message
+        })
+      }
+
     })
   }
 }

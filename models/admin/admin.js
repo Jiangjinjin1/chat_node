@@ -7,8 +7,8 @@ const chatuserSchema = new Schema({
   username: {type: String, unique: true},
   password: {type: String, required: true},
   userId: {type: String, unique: true},
-  avatar: String,
-  nickname: String
+  avatar: {type: String, default: ''},
+  nickname: {type: String, default: ''}
 })
 
 chatuserSchema.index({id: 1})
