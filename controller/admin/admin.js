@@ -40,7 +40,6 @@ class Admin {
 
       //将有效的用户名和密码存入数据库
       //注册时先比对数据库是否存在相同的用户名
-      console.log('User-----:', User)
 
       try{
         const userInfo = await User.find({username})

@@ -47,9 +47,9 @@
       $('#messages').append($('<li>').text(msg));
     }
 
-    // $.ajax('/admin/regist',{method: 'POST',data:{
-    //   username: '15221444332',password: '123'
-    // }})
+    $.ajax('/admin/regist',{method: 'POST',data:{
+      username: '13612341234',password: '123'
+    }})
 
     // $.ajax('/admin/login',{method: 'POST',data:{
     //   username: '15221444332',password: '123'
@@ -63,16 +63,16 @@
     //   nickname: '小二哈'
     // }})
 
-    $.ajax('/admin/login',{
-      method: 'POST',
-      data:{
-        username: '15221444332',password: '123'
-      },
-      success: function() {
-        $.ajax('/admin/addNickName',{method: 'POST',data:{
-          nickname: '小二哈'
-        }})
-      }
-    })
+    // $.ajax('/admin/login',{
+    //   method: 'POST',
+    //   data:{
+    //     username: '15221444332',password: '123'
+    //   },
+    //   success: function() {
+    //     $.ajax('/admin/addNickName',{method: 'POST',data:{
+    //       nickname: '小二哈'
+    //     }})
+    //   }
+    // })
   </script>
 </html>
