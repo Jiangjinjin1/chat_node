@@ -1,6 +1,6 @@
 import formidable from 'formidable'
 import _ from 'lodash'
-import shortid from 'js-shortid'
+// import shortid from 'js-shortid'
 import AdminModel from '../../models/admin/admin'
 
 const {User} = AdminModel
@@ -43,14 +43,14 @@ class Admin {
 
       try{
         const userInfo = await User.find({username})
-        const userId = shortid.gen()
+        // const userId = shortid.gen()
         if(!_.isEmpty(userInfo)) {
           throw new Error('该账户已被注册，请更换账号重新注册')
         } else {
           const newUserInfo = {
             username,
             password,
-            userId
+            // userId
           }
 
           const newUser = await User.create(newUserInfo).catch(function(err) {
@@ -216,12 +216,12 @@ class Admin {
             throw new Error(e.massage)
           })
 
+          newUserInfo.password = undefined
+          newUserInfo.nickname = nickname
+
           res.send({
             code: 0,
-            data: {
-              username: newUserInfo.username,
-              nickname: newUserInfo.nickname
-            },
+            data: newUserInfo,
             msg: '添加昵称成功'
           })
         } else {
