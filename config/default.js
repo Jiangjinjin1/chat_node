@@ -1,6 +1,6 @@
 'use strict'
 
-const url = 'mongodb://localhost:27017/chat_node'
+const url = process.env.NODE_ENV === 'production'?'mongodb://chat_node:chat_node@localhost:27017/chat_node':'mongodb://localhost:27017/chat_node'
 
 export default {
   port: 9000,

@@ -1,78 +1,13 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Socket.IO chat</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-    </style>
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-  </head>
-  <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>发送</button>
-    </form>
-  </body>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var name   = prompt("请输入你的昵称：");
-    var socket = io('http://localhost:9000/chat')
-    
-    //发送昵称给后端，并更改网页title
-    socket.emit("join", name)
-    document.title = name + "的群聊"
-    socket.on("join", function (user) {
-      addLine(user + " 加入了群聊")
-    })
-    //接收到服务器发来的message事件
-    socket.on("message", function(msg) {
-      addLine(msg)
-    })
-    //当发送按钮被点击时
-    $('form').submit(function () {
-      var msg = $("#m").val() //获取用户输入的信息
-      socket.emit("message", msg) //将消息发送给服务器
-      $("#m").val("") //置空消息框
-      return false //阻止form提交
-    })
-    function addLine(msg) {
-      $('#messages').append($('<li>').text(msg));
-    }
-
-    $.ajax('/admin/regist',{method: 'POST',data:{
-      username: '13612341234',password: '123'
-    }})
-
-    // $.ajax('/admin/login',{method: 'POST',data:{
-    //   username: '15221444332',password: '123'
-    // }})
-
-    // $.ajax('/admin/modifyPassWord',{method: 'POST',data:{
-    //   username: '15221444332',password: '12345'
-    // }})
-
-    // $.ajax('/admin/addNickName',{method: 'POST',data:{
-    //   nickname: '小二哈'
-    // }})
-
-    // $.ajax('/admin/login',{
-    //   method: 'POST',
-    //   data:{
-    //     username: '15221444332',password: '123'
-    //   },
-    //   success: function() {
-    //     $.ajax('/admin/addNickName',{method: 'POST',data:{
-    //       nickname: '小二哈'
-    //     }})
-    //   }
-    // })
-  </script>
+  <title></title>
+<link rel="shortcut icon" href="./favicon.png"><link href="./css/0.styles.f5c597bf.css" rel="stylesheet"><link href="./css/8.styles.c1f90042.css" rel="stylesheet"></head>
+<body>
+  <div id="app"></div>
+<script type="text/javascript" src="./js/runtime.3bf8ed51.js"></script><script type="text/javascript" src="./js/common.f5c597bf.js"></script><script type="text/javascript" src="./js/client.c1f90042.js"></script></body>
 </html>
