@@ -22,7 +22,7 @@
 }
 .chatInfo .chatInfoContainer .rightContainer .rightMessage[data-v-5b8eec91]{display:flex;background-image:url(../images/3090a3243316063d2b0a1f282b476dc1.png);background-repeat:no-repeat;background-size:100% 100%;width:13.8rem;min-height:3.1rem;align-items:center
 }
-.chatInfo .chatInfoContainer .rightContainer .rightMessage .content[data-v-5b8eec91]{font-size:.65rem;color:#434a54;font-weight:500;max-width:12.7rem;padding:.5rem 0;padding-left:1.3rem
+.chatInfo .chatInfoContainer .rightContainer .rightMessage .content[data-v-5b8eec91]{font-size:.65rem;color:#434a54;font-weight:500;max-width:12.7rem;padding:.5rem 0;padding-left:1.3rem;word-break:break-all;word-wrap:break-word
 }
 /*// 背景图片地址和大小*/
 /*//定位全屏*/
@@ -50,7 +50,7 @@
 }
 .chatInfo .chatInfoContainer .rightContainer .rightMessage[data-v-5393bf82]{display:flex;background-image:url(../images/ba66a7d0e67a09edd8e768713b50a789.png);background-repeat:no-repeat;background-size:100% 100%;width:13.8rem;min-height:3.1rem;align-items:center
 }
-.chatInfo .chatInfoContainer .rightContainer .rightMessage .content[data-v-5393bf82]{font-size:.65rem;color:#fff;font-weight:500;max-width:12.7rem;padding:.5rem 0;padding-left:1.3rem
+.chatInfo .chatInfoContainer .rightContainer .rightMessage .content[data-v-5393bf82]{font-size:.65rem;color:#fff;font-weight:500;max-width:12.7rem;padding:.5rem 0;padding-left:1.3rem;word-break:break-all;word-wrap:break-word
 }
 /*// 背景图片地址和大小*/
 /*//定位全屏*/
