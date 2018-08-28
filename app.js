@@ -17,8 +17,19 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIo(server)
 
-io.on('connection', function(socket) {
-  console.log('a user comming')
+const chat1 = io.of('/chat') // 命名空间，为了以后分出不同线路做拓展
+
+/**
+ * socket.emit() ：向建立该连接的客户端广播
+   socket.broadcast.emit() ：向除去建立该连接的客户端的所有客户端广播
+   io.sockets.emit() ：向所有客户端广播，等同于上面两个的和
+ */
+
+chat1.on('connection', function(socket) {
+  socket.on('my-send',function(data) {
+    console.log(data)
+    socket.broadcast.emit('allPeople', {...data,type: '1'})
+  })
 })
 
 
