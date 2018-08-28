@@ -28,7 +28,7 @@ const chat1 = io.of('/chat') // 命名空间，为了以后分出不同线路做
 chat1.on('connection', function(socket) {
   socket.on('my-send',function(data) {
     console.log(data)
-    socket.broadcast.emit('allPeople', {...data,type: '1'})
+    socket.broadcast.emit('SOCKET_USER_MESSAGE', {...data,type: '1'})
   })
 })
 
