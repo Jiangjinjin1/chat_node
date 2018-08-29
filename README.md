@@ -2,13 +2,20 @@
 
   ### 简介：这是一个用 `node+mongoose+redis+vue+vuex` 做的一款聊天应用
 
-  #### 详情请看下图
+  #### 首页
       
   ![](readmeImages/chatInde.jpg)
 
-  #### 首页
+  #### 群聊窗口
 
   ![](readmeImages/chatWindow.jpg)
+
+## 未来拓展
+  1. 聊天窗口记录
+  2. 做一对一的私聊
+  3. 头像上传
+  4. 免登陆操作
+  5. 。。。
 
 ## 准备工作
 
