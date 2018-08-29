@@ -21,6 +21,8 @@
 
 > `npm i` 下载依赖项
 
+> 在安装好mongodb客户端，且通过bash或者oh-my-zsh配置好全局mongod的环境，在任   意位置执行 `mongod`，否则请移步到mongod的相应目录下执行 `mongod`
+
 > 本地起服务执行 `npm run dev`
 
 > 服务启动后在浏览器输入 `localhost:9000` 即可
