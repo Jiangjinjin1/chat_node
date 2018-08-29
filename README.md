@@ -4,11 +4,11 @@
 
   #### 详情请看下图
       
-      ![](readmeImages/chatInde.jpg)
+  ![](readmeImages/chatInde.jpg)
 
   #### 首页
 
-      ![](readmeImages/chatWindow.jpg)
+  ![](readmeImages/chatWindow.jpg)
 
 ## 准备工作
 
