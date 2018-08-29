@@ -111,12 +111,8 @@ class Admin {
         } else{
           const curUser = await User.findOne({username, password})
           if(!_.isEmpty(curUser)) {
-            req.session.userBasicInfo = {
-              username: curUser.username,
-              userId: curUser.userId
-            }
-
             curUser.password = undefined
+            req.session.userBasicInfo = curUser
 
             res.send({
               code: 0,
@@ -142,6 +138,15 @@ class Admin {
     const form = formidable.IncomingForm()
 
     form.parse(req, async (err, fileds, files) => {
+
+      if(err) {
+        res.send({
+          code: 1000,
+          type: 'FORM_DATA_ERROR',
+          msg: '表单信息错误'
+        })
+      }
+
       try{
         const {
           username,
@@ -237,6 +242,66 @@ class Admin {
       }
 
     })
+  }
+
+  async checkLogin(req, res, next) {
+
+    try{
+      if(!_.isEmpty(req.session.userBasicInfo)) {
+        res.send({
+          code: 0,
+          data: req.session.userBasicInfo,
+          msg: '该用户登录过'
+        })
+      } else {
+        res.send({
+          code: 1000,
+          type: 'LOGIN_INVALID_ERROR',
+          msg: '用户登录已失效'
+        })
+      }
+    }catch(e) {
+      res.send({
+        code: 1000,
+        type: 'CHECK_LOGIN_ERROR',
+        msg: e.message
+      })
+    }
+  }
+
+  async logout(req, res, next) {
+    try{
+      const session = req.session
+      if(!_.isEmpty(session.userBasicInfo)) {
+        const {
+          _id,
+        } = session.userBasicInfo
+
+        await User.findOneAndUpdate({_id}).catch((e) => {
+          throw new Error(e.massage)
+        })
+
+        delete session.userBasicInfo
+
+        res.send({
+          code: 0,
+          data: {},
+          msg: '注销账户成功'
+        })
+      } else {
+        res.send({
+          code: 1000,
+          type: 'LOGIN_INVALID_ERROR',
+          msg: '用户登录已失效'
+        })
+      }
+    }catch(e) {
+      res.send({
+        code: 1000,
+        type: 'LOGOUT_ERROR',
+        msg: '注销接口失败'
+      })
+    }
   }
 }
 
