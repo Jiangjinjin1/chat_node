@@ -1,5 +1,15 @@
 # chatNode
 
+  ### 简介：这是一个用 `node+mongoose+redis+vue+vuex` 做的一款聊天应用
+
+      #### 详情请看下图
+      
+      ![](readmeImages/chatInde.jpg)
+
+      #### 首页
+
+      ![](readmeImages/chatWindow.jpg)
+
 ## 准备工作
 
   1. 先在本地安装好mongodb客户端，可以装个Robo 3T的数据库视图工具
