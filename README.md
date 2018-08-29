@@ -2,11 +2,11 @@
 
   ### 简介：这是一个用 `node+mongoose+redis+vue+vuex` 做的一款聊天应用
 
-      #### 详情请看下图
+  #### 详情请看下图
       
       ![](readmeImages/chatInde.jpg)
 
-      #### 首页
+  #### 首页
 
       ![](readmeImages/chatWindow.jpg)
 
