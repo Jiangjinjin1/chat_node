@@ -339,10 +339,14 @@ class Admin {
               _id,
             } = req.session.userBasicInfo
 
+            const userContainImgDir = path.join(__dirname,'../../public/srcImages')
             const userImgDir = path.join(__dirname,`../../public/srcImages/${_id}`)
 
-            if(!fs.existsSync(userImgDir)) {
-              fs.mkdirSync(userImgDir)
+            if(!fs.existsSync(userContainImgDir)) {
+              fs.mkdirSync(userContainImgDir)
+              if(!fs.existsSync(userImgDir)) {
+                fs.mkdirSync(userImgDir)
+              }
             }
 
             const imgLocalPath = path.join(__dirname,`../../public/srcImages/${_id}/${name}`)
