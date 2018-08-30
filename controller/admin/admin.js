@@ -1,5 +1,7 @@
 import formidable from 'formidable'
 import _ from 'lodash'
+import fs from 'fs'
+import path from 'path'
 // import shortid from 'js-shortid'
 import AdminModel from '../../models/admin/admin'
 
@@ -304,6 +306,83 @@ class Admin {
         code: 1000,
         type: 'LOGOUT_ERROR',
         msg: '注销接口失败'
+      })
+    }
+  }
+
+  async uploadAvatar(req, res, next) {
+    try{
+      const form = formidable.IncomingForm()
+      form.parse(req, async (err, fileds, files) => {
+        if(err) {
+          res.send({
+            code: 1000,
+            type: 'FORM_DATA_ERROR',
+            msg: '表单信息错误'
+          })
+        }
+
+        try{
+
+          const {
+            avatar = {} // avatar为前端传过来--formData.append('avatar', avatarFile.files[0],avatarFile.files[0].name)
+          } = files
+          const {
+            name,
+            path: filePath
+          } = avatar
+
+          console.log('avatar----------:',avatar)
+
+          if(!_.isEmpty(req.session.userBasicInfo)) {
+            const {
+              _id,
+            } = req.session.userBasicInfo
+
+            const userImgDir = path.join(__dirname,`../../public/srcImages/${_id}`)
+
+            if(!fs.existsSync(userImgDir)) {
+              fs.mkdirSync(userImgDir)
+            }
+
+            const imgLocalPath = path.join(__dirname,`../../public/srcImages/${_id}/${name}`)
+            const fileData = fs.readFileSync(filePath)
+            fs.writeFileSync(imgLocalPath, fileData)
+
+            console.log('fileData---------:',fileData)
+
+            const newUserInfo = await User.findOneAndUpdate({_id},{avatar:`/srcImages/${_id}/${name}`})
+
+            newUserInfo.password = undefined
+            newUserInfo.avatar = `/srcImages/${_id}/${name}`
+
+            req.session.userBasicInfo = newUserInfo
+
+            res.send({
+              code: 0,
+              data: newUserInfo,
+              msg: '图片上传成功'
+            })
+          }else {
+            res.send({
+              code: 2000,
+              type: 'LOGIN_INVALID_ERROR',
+              msg: '用户登录已失效'
+            })
+          }
+        }catch(e) {
+          res.send({
+            code: 1000,
+            type: 'UPLOAD_ERROR',
+            msg: e.message
+          })
+        }
+      })
+    }catch(e) {
+      res.send({
+        code: 1000,
+        type: 'UPLOAD_AVATAR_ERROR',
+        msg: '头像上传错误'
       })
     }
   }

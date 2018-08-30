@@ -10,5 +10,6 @@ router.post('/modifyPassWord', Admin.modifyPassWord)
 router.post('/addNickName', Admin.addNickName)
 router.post('/checkLogin', Admin.checkLogin)
 router.post('/logout', Admin.logout)
+router.post('/uploadAvatar', Admin.uploadAvatar)
 
 export default router
