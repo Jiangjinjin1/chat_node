@@ -1,0 +1,32 @@
+/*// 背景图片地址和大小*/
+/*//定位全屏*/
+/*//定位上下左右居中*/
+/*//定位上下居中*/
+/*//定位上下居中*/
+/*//宽高*/
+/*//字体大小、行高、字体*/
+/*//字体大小，颜色*/
+/*//flex 布局和 子元素 对其方式*/
+/*多行省略*/
+.uploadAvatar{display:flex;flex:1;flex-direction:column;width:100%;height:100%
+}
+.uploadAvatar .uploadContainer{display:flex;flex:1;flex-direction:column;justify-content:space-between
+}
+.uploadAvatar .uploadContainer .containerDiv{display:flex;flex-direction:row;align-items:center
+}
+.uploadAvatar .uploadContainer .containerDiv .avatarDiv{display:flex;justify-content:center;align-items:center;width:4rem;height:4em;margin:1rem;border:1px solid #f3f3f3
+}
+.uploadAvatar .uploadContainer .containerDiv .avatarDiv img{width:3.8rem;height:3.8em
+}
+.uploadAvatar .uploadContainer .containerDiv .selectFile{padding:1rem
+}
+.uploadAvatar .uploadContainer .containerDiv .selectFile label{display:flex;justify-content:center;align-items:center;width:4rem;height:4rem
+}
+.uploadAvatar .uploadContainer .containerDiv .selectFile label .selctIcon{width:4rem;height:4rem
+}
+.uploadAvatar .uploadContainer .buttonDiv{display:flex;flex-direction:column;justify-content:center
+}
+.uploadAvatar .uploadContainer .buttonDiv .el-button{flex:1;margin:.5rem 1.5rem;background-color:#56b3f6
+}
+.uploadAvatar .uploadContainer .buttonDiv .el-button span{color:#feffff;font-size:.8rem
+}
