@@ -230,7 +230,11 @@ class Admin {
             msg: '添加昵称成功'
           })
         } else {
-          throw new Error('用户session失效,请重新登录')
+          res.send({
+            code: 2000,
+            type: 'LOGIN_INVALID_ERROR',
+            msg: '用户登录已失效'
+          })
         }
 
       }catch(e){
@@ -255,7 +259,7 @@ class Admin {
         })
       } else {
         res.send({
-          code: 1000,
+          code: 2000,
           type: 'LOGIN_INVALID_ERROR',
           msg: '用户登录已失效'
         })
@@ -290,7 +294,7 @@ class Admin {
         })
       } else {
         res.send({
-          code: 1000,
+          code: 2000,
           type: 'LOGIN_INVALID_ERROR',
           msg: '用户登录已失效'
         })
