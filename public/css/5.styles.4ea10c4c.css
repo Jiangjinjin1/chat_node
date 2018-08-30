@@ -1,0 +1,38 @@
+/*// 背景图片地址和大小*/
+/*//定位全屏*/
+/*//定位上下左右居中*/
+/*//定位上下居中*/
+/*//定位上下居中*/
+/*//宽高*/
+/*//字体大小、行高、字体*/
+/*//字体大小，颜色*/
+/*//flex 布局和 子元素 对其方式*/
+/*多行省略*/
+.launchContainer{width:100%;height:100%;display:flex;flex:1;flex-direction:column;background-image:url(../images/928549d8685ab6d9bee9f4b92b54f0c0.png);background-repeat:no-repeat;background-size:100% 100%
+}
+.launchContainer .avatar{display:flex;justify-content:center;padding-top:5rem
+}
+.launchContainer .avatar img{border-radius:50%;width:4rem;height:4rem
+}
+.launchContainer .userInput{padding-top:2rem
+}
+.launchContainer .userInput .inptDivCommon{display:flex;flex-direction:row;align-items:center;margin:0 1.5rem 1rem;padding:0 .5rem;border:1px solid #a3cbdf;border-radius:1.2rem
+}
+.launchContainer .userInput .inptDivCommon span:first-child{width:3.5rem;color:#a3cbdf;font-size:.65rem
+}
+.launchContainer .userInput .inptDivCommon .phoneOrPass{width:1rem;height:1rem
+}
+.launchContainer .userInput .inptDivCommon .el-input__inner{border:none;background-color:transparent;color:#fff
+}
+.launchContainer .controlBtn{display:flex;flex-direction:column;justify-content:center
+}
+.launchContainer .controlBtn .el-button{flex:1;margin:.5rem 1.5rem;background-color:#56b3f6
+}
+.launchContainer .controlBtn .el-button span{color:#feffff;font-size:.8rem
+}
+.launchContainer .controlBtn .footerBtn{display:flex;flex-direction:row;justify-content:center
+}
+.launchContainer .controlBtn .footerBtn p{color:#dff0fc;font-size:.55rem
+}
+.launchContainer .controlBtn .footerBtn p:nth-child(2){padding:0 .2rem
+}
