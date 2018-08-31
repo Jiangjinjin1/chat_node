@@ -344,9 +344,9 @@ class Admin {
 
             if(!fs.existsSync(userContainImgDir)) {
               fs.mkdirSync(userContainImgDir)
-              if(!fs.existsSync(userImgDir)) {
-                fs.mkdirSync(userImgDir)
-              }
+            }
+            if(!fs.existsSync(userImgDir)) {
+              fs.mkdirSync(userImgDir)
             }
 
             const imgLocalPath = path.join(__dirname,`../../public/srcImages/${_id}/${name}`)
