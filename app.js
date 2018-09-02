@@ -1,5 +1,4 @@
 import express from 'express'
-import socketIo from 'socket.io'
 import http from 'http'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
@@ -10,28 +9,12 @@ import expressWinston from 'express-winston';
 import path from 'path';
 import history from 'connect-history-api-fallback';
 import './mongodb/db'
+import { IO } from './socket/chat'
 import router from './routes/index.js'
 import config from './config/default'
 
 const app = express()
 const server = http.createServer(app)
-const io = socketIo(server)
-
-const chat1 = io.of('/chat') // 命名空间，为了以后分出不同线路做拓展
-
-/**
- * socket.emit() ：向建立该连接的客户端广播
-   socket.broadcast.emit() ：向除去建立该连接的客户端的所有客户端广播
-   io.sockets.emit() ：向所有客户端广播，等同于上面两个的和
- */
-
-chat1.on('connection', function(socket) {
-  socket.on('my-send',function(data) {
-    console.log(data)
-    socket.broadcast.emit('SOCKET_USER_MESSAGE', {...data,type: '1'})
-  })
-})
-
 
 // 中间件及路由配置
 
@@ -62,16 +45,18 @@ const redisClient = redis.createClient({
 
 const StoreInstance = new RedisStore({client: redisClient})
 
-
-//缓存到session到redis数据库
-app.use(session({
+const sessionMiddleware = session({
   name: config.session.name, //  设置 cookie 中，保存 session 的字段名称，默认为 connect.sid
   secret: config.session.secret, // 通过设置的 secret 字符串，来计算 hash 值并放在 cookie 中，使产生的 signedCookie 防篡改
   resave: false, // 即使 session 没有被修改，也保存 session 值，默认为 true。
   saveUninitialized: false, // 刚被创建没有被修改,如果是要实现登陆的session那么最好设置为false
   cookie: config.session.cookie,
   store: StoreInstance,
-}))
+})
+
+
+//缓存到session到redis数据库
+app.use(sessionMiddleware)
 
 // 测试
 app.use(function (req, res, next) {  
@@ -124,7 +109,8 @@ app.use((err, req, res, next) => {
 	res.status(404).send('未找到当前路由');
 });
 
-
+// 建立socket.io
+IO(server, sessionMiddleware)
 
 server.listen(config.port, function() {
   console.log('已经监听到端口9000')
