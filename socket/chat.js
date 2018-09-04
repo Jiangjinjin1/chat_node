@@ -64,8 +64,11 @@ export const IO = (server, sessionMiddleware) => {
       if(!users[username]) {
         userCount++
       }
+      const session = socket.request.session
+      const userBasicInfo = session.userBasicInfo
 
-      users[username] = username
+      users[username] = userBasicInfo
+      console.log('users[username]=-------=:', users)
       usockets[username] = socket
 
       chat1.emit('SHOW_USER_JOIN', {
