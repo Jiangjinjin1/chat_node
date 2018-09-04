@@ -12,7 +12,7 @@ export const IO = (server, sessionMiddleware) => {
 
   const users = {} // 用户名存储
   const usockets = {} // 用户的socket对象存储
-  const userCount = 0 // 加入聊天室的用户数量
+  let userCount = 0 // 加入聊天室的用户数量
 
   const chat1 = io.of('/chat') // 命名空间，为了以后分出不同线路做拓展
 
@@ -31,6 +31,7 @@ export const IO = (server, sessionMiddleware) => {
       if(curUsername) {
         users[curUsername] = undefined
         usockets[curUsername] = undefined
+        userCount--
       }
 
       chat1.emit('SHOW_USER_LEAVE', {
@@ -57,19 +58,20 @@ export const IO = (server, sessionMiddleware) => {
     socket.on('USER_JOIN', function(data) {
       const {
         username,
-        message,
       } = data
 
       curUsername = username
-      userCount++
+      if(!users[username]) {
+        userCount++
+      }
 
       users[username] = username
       usockets[username] = socket
 
       chat1.emit('SHOW_USER_JOIN', {
-        userCount: `欢迎<b>${data.user}</b>进入聊天室`,
+        userCount,
         users,
-        message
+        message: `欢迎<b>${username}</b>进入聊天室`
       })
       
     })
